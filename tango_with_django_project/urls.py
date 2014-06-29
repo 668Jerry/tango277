@@ -25,3 +25,7 @@ if settings.DEBUG:
     urlpatterns += patterns('django.views.static',
         (r'media/(?P<path>.*)', 'serve', {'document_root':settings.MEDIA_ROOT}),
     )
+
+urlpatterns += patterns(
+    url(r'^add_category/$', views.add_category, name='add_category'), # NEW MAPPING!
+    )
