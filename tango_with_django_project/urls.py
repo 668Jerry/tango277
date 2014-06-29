@@ -15,6 +15,7 @@ from django.conf.urls import patterns, url
 from rango import views
 urlpatterns += patterns('',
     url(r'^$',views.index,name='index'),
+    url(r'^add_category/$', views.add_category, name='add_category'), # NEW MAPPING!
     url(r'^rango/category/(?P<category_name_url>\w+)/$', views.category, name='category'),  # New!
 )
 
@@ -24,8 +25,4 @@ from django.conf import settings
 if settings.DEBUG:
     urlpatterns += patterns('django.views.static',
         (r'media/(?P<path>.*)', 'serve', {'document_root':settings.MEDIA_ROOT}),
-    )
-
-urlpatterns += patterns(
-    url(r'^add_category/$', views.add_category, name='add_category'), # NEW MAPPING!
     )
