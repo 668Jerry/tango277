@@ -20,3 +20,11 @@ class Page(models.Model):
 
 # Import the Category model
 from rango.models import Category
+
+class CategoryTest(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    likes = models.IntegerField(default=0)
+    likesTest = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.name
