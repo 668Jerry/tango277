@@ -32,6 +32,11 @@ def index(request):
 
     return render_to_response('rango/index.html', context_dict, context)
 
+def evil(request):
+    context = RequestContext(request)
+    context_dict = {}
+    return render_to_response('rango/evil.html', context_dict, context)
+
 def category(request, category_name_url):
     # Request our context from the request passed to us.
     context = RequestContext(request)
