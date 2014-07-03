@@ -145,3 +145,5 @@ DATABASES = {
         'NAME': DATABASE_PATH,
     }
 }
+
+LOGIN_URL = '/rango/login/'
