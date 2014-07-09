@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^restricted/', views.restricted, name='restricted'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^evil/$', views.evil, name='evil'),  # New!
+    url(r'^about/$', views.about, name='about'),
     )

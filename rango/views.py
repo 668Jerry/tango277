@@ -81,7 +81,7 @@ def index(request):
         # The get returns None, and the session does not have a value for the last visit.
         request.session['session_last_visit'] = str(datetime.now())
         request.session['session_visits'] = 1
-        print "session_visits: " + str(session_visits)
+        # print "session_visits: " + str(session_last_visit)
     #### END NEW CODE ####
 
     # Return response back to the user, updating any cookies that need changed.
@@ -343,3 +343,22 @@ def user_logout(request):
 
     # Take the user back to the homepage.
     return HttpResponseRedirect('/rango/')
+
+
+def about(request):
+    # Request the context.
+    context = RequestContext(request)
+    context_dict = {}
+    # cat_list = get_category_list()
+    # category_list = Category.objects.order_by('-likes')[:5]
+    cat_list = Category.objects.order_by('-likes')[:5]
+    context_dict['cat_list'] = cat_list
+    # If the visits session varible exists, take it and use it.
+    # If it doesn't, we haven't visited the site so set the count to zero.
+
+    count = request.session.get('visits',0)
+
+    context_dict['visit_count'] = count
+
+    # Return and render the response, ensuring the count is passed to the template engine.
+    return render_to_response('rango/about.html', context_dict , context)
