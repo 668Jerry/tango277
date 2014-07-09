@@ -1,12 +1,12 @@
 {% extends "rango/base.html" %}
 
-{% block title %}Welcome to Rango!{% endblock %}
+{% block title %}Welcome to Django!{% endblock %}
 
 {% block body_block %}
 <div class="jumbotron">
-    <h1>Ready to Rango</h1>
+    <h1>Ready to Django</h1>
 
-    <p>Find, Add, Share and Rango useful links and resources.</p>
+    <p>Find, Add, Share and Django useful links and resources.</p>
 </div>
 
 <div class="row">
@@ -15,7 +15,7 @@
         {% if categories %}
         <ul>
             {% for category in categories %}
-            <li><a href="/rango/category/{{ category.url }}">{{ category.name }}</a></li>
+            <li><a href="/rango/category/{{ category.name }}">{{ category.name }}</a></li>
             {% endfor %}
         </ul>
         {% else %}

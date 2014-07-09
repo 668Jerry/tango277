@@ -13,7 +13,7 @@
     <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
-    <title>Rango - {% block title %}How to Tango with Django!{% endblock %}</title>
+    <title>Django - {% block title %}This is a Django page!{% endblock %}</title>
 </head>
 
 <body>
@@ -25,32 +25,41 @@
 {#                   <span class="icon-bar"></span>#}
 {#                   <span class="icon-bar"></span>#}
 {#               </button>#}
-                <div class="col-md-2"><a class="navbar-brand" href="/rango/">Rango</a></div>
+                <div class="col-md-2"><a class="navbar-brand" href="/rango/">Django</a></div>
 
                   <ul class="col-md-4">
-                        {% if user.is_authenticated %}
+
     {#                        <li><a href="/rango/restricted/">Restricted</a></li>#}
-                        <div class="col-md-2"><a href="/rango/add_category/">Add Category</a></div>
-                        {% endif %}
+{#                        <ul class="nav nav-pills">#}
+{#                            <li><a href="http://www.tangowithdjango.com/">TWD</a></li>#}
+{#                            <li><a href="http://www.tangowithdjango.com/book/">Book</a></li>#}
+{#                            <li><a href="/rango/about/">About</a></li>#}
+{##}
+{#                        </ul>#}
+
                         <!--- <li><a href="/rango/search">Search</a></li> -->
                         <ul class="nav nav-pills">
                             <li><a href="http://www.tangowithdjango.com/">TWD</a></li>
                             <li><a href="http://www.tangowithdjango.com/book/">Book</a></li>
                             <li><a href="/rango/about/">About</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="/rango/add_category/">Add Category</a></li>
+                            {% endif %}
                         </ul>
+
                    </ul>
                    <ul class="pull-right col-md-6">
                         {% if user.is_authenticated %}
                         <ul class="nav nav-pills">
-                            <li class="navbar-text col-md-8">Welcome, {{ user.username }}!</li>
-                            <li class="col-md-3"><a href="/rango/profile/">Profile</a></li>
-                            <li class="col-md-2"><a href="/rango/logout/">Logout</a></li>
+                            <li class="navbar-text col-md-4">Welcome, {{ user.username }}!</li>
+                            <li class="col-md-3"><a href="/rango/about/">Profile</a></li>
+                            <li class="col-md-3"><a href="/rango/logout/">Logout</a></li>
                         </ul>
                         {% else %}
                         <ul class="nav nav-pills">
-                            <li class="navbar-text col-md-6">Good Day!!</li>
+                            <li class="navbar-text col-md-5">Good Day!!</li>
                             <li class="col-md-3"><a href="/rango/register/">Register</a></li>
-                            <li class="col-md-2"><a href="/rango/login/">Login</a></li>
+                            <li class="col-md-3"><a href="/rango/login/">Login</a></li>
                         </ul>
                         {% endif %}
                    </ul>
@@ -105,7 +114,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; Rango: How to Tango with Django 2013</p>
+            <p>&copy; Django Summer 2014: powered by How to tango with Django!!</p>
+            <p>This is Chun-Yi, Kuo.</p>
         </div>
     </footer>
 
