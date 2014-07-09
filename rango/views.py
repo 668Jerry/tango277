@@ -10,8 +10,11 @@ from django.shortcuts import render_to_response
 #Import the Category model
 from rango.models import Category
 from rango.models import Page
+from datetime import datetime
 
 def index(request):
+    #request.session.set_test_cookie()
+    #print ">>>> TEST Good Morning!!"
     # Request the context of the request.
     # The context contains information such as the client's machine details, for example.
     context = RequestContext(request)
@@ -24,13 +27,66 @@ def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     context_dict['categories'] = category_list
 
-    # The following two lines are new.
-    # We loop through each category returned, and create a URL attribute.
-    # This attribute stores an encoded URL (e.g. spaces replaced with underscores).
-    for category in category_list:
-        category.url = category.name.replace(' ', '_')
+#    response = render_to_response('rango/index.html', context_dict, context)
+#
+#    # The following two lines are new.
+#    # We loop through each category returned, and create a URL attribute.
+#    # This attribute stores an encoded URL (e.g. spaces replaced with underscores).
+#    for category in category_list:
+#        category.url = category.name.replace(' ', '_')
+#
+#    return render_to_response('rango/index.html', context_dict, context)
+    #### NEW CODE ####
+    # Obtain our Response object early so we can add cookie information.
+    response = render_to_response('rango/index.html', context_dict, context)
 
-    return render_to_response('rango/index.html', context_dict, context)
+    # Get the number of visits to the site.
+    # We use the COOKIES.get() function to obtain the visits cookie.
+    # If the cookie exists, the value returned is casted to an integer.
+    # If the cookie doesn't exist, we default to zero and cast that.
+    visits = int(request.COOKIES.get('visits', '1000'))
+    print "visits: " + str(visits)
+
+    # Does the cookie last_visit exist?
+    if 'last_visit' in request.COOKIES:
+        # Yes it does! Get the cookie's value.
+        last_visit = request.COOKIES['last_visit']
+        print "last_visit: " + str(last_visit)
+        # Cast the value to a Python date/time object.
+        last_visit_time = datetime.strptime(last_visit[:-7], "%Y-%m-%d %H:%M:%S")
+        print "last_visit_time: " + str(last_visit_time)
+
+        # If it's been more than a day since the last visit...
+        if (datetime.now() - last_visit_time).seconds > 5:
+            # ...reassign the value of the cookie to +1 of what it was before...
+            response.set_cookie('visits', visits+1)
+            # ...and update the last visit cookie, too.
+            response.set_cookie('last_visit', datetime.now())
+    else:
+        # Cookie last_visit doesn't exist, so create it to the current date/time.
+        response.set_cookie('last_visit', datetime.now())
+    response.set_cookie('hello', 'Just a hello with else.')
+
+    #### NEW CODE ####
+    if request.session.get('session_last_visit'):
+        # The session has a value for the last visit
+        session_last_visit_time = request.session.get('session_last_visit')
+        session_visits = request.session.get('session_visits', 0)
+
+        if (datetime.now() - datetime.strptime(session_last_visit_time[:-7], "%Y-%m-%d %H:%M:%S")).seconds > 5:
+            request.session['session_visits'] = session_visits + 1
+            request.session['session_last_visit'] = str(datetime.now())
+        print "session_visits: " + str(session_visits)
+    else:
+        # The get returns None, and the session does not have a value for the last visit.
+        request.session['session_last_visit'] = str(datetime.now())
+        request.session['session_visits'] = 1
+        print "session_visits: " + str(session_visits)
+    #### END NEW CODE ####
+
+    # Return response back to the user, updating any cookies that need changed.
+    return response
+    #### END NEW CODE ####
 
 def evil(request):
     context = RequestContext(request)
@@ -166,6 +222,10 @@ def add_page(request, category_name_url):
 from rango.forms import UserForm, UserProfileForm
 
 def register(request):
+    if request.session.test_cookie_worked():
+        print ">>>> TEST COOKIE WORKED!"
+        #request.session.delete_test_cookie()
+    
     # Like before, get the request's context.
     context = RequestContext(request)
 
