@@ -12,6 +12,28 @@ from rango.models import Category
 from rango.models import Page
 from datetime import datetime
 
+def encode_url(str):
+    return str.replace(' ', '_')
+
+def decode_url(str):
+    return str.replace('_', ' ')
+
+def get_category_list(max_results=0, starts_with=''):
+    cat_list = []
+    if starts_with:
+        cat_list = Category.objects.filter(name__startswith=starts_with)
+    else:
+        cat_list = Category.objects.all()
+
+    if max_results > 0:
+        if (len(cat_list) > max_results):
+            cat_list = cat_list[:max_results]
+
+    for cat in cat_list:
+        cat.url = encode_url(cat.name)
+
+    return cat_list
+
 def index(request):
     #request.session.set_test_cookie()
     #print ">>>> TEST Good Morning!!"
@@ -27,6 +49,8 @@ def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     context_dict['categories'] = category_list
 
+    cat_list = get_category_list()
+    context_dict['cat_list'] = cat_list
 #    response = render_to_response('rango/index.html', context_dict, context)
 #
 #    # The following two lines are new.
@@ -106,6 +130,11 @@ def category(request, category_name_url):
     # We start by containing the name of the category passed by the user.
     context_dict = {'category_name': category_name}
 
+
+    cat_list = get_category_list()
+    context_dict['cat_list'] = cat_list
+
+
     try:
         # Can we find a category with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
@@ -170,9 +199,13 @@ def add_category(request):
         # If the request was not a POST, display the form to enter details.
         form = CategoryForm()
 
+    cat_list = get_category_list()
+    context_dict = {'form': form}
+    context_dict['cat_list'] = cat_list
+
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
-    return render_to_response('rango/add_category.html', {'form': form}, context)
+    return render_to_response('rango/add_category.html', context_dict, context)
 
 from rango.forms import PageForm
 
@@ -214,10 +247,13 @@ def add_page(request, category_name_url):
     else:
         form = PageForm()
 
-    return render_to_response( 'rango/add_page.html',
-            {'category_name_url': category_name_url,
-             'category_name': category_name, 'form': form},
-             context)
+    cat_list = get_category_list()
+    context_dict = {'category_name_url': category_name_url,
+             'category_name': category_name, 'form': form}
+    context_dict['cat_list'] = cat_list
+
+
+    return render_to_response( 'rango/add_page.html', context_dict, context)
 
 from rango.forms import UserForm, UserProfileForm
 
@@ -360,6 +396,8 @@ def about(request):
 
     context_dict['visit_count'] = count
 
+    cat_list = get_category_list()
+    context_dict['cat_list'] = cat_list
 
     if request.session.get('session_last_visit'):
         # The session has a value for the last visit
@@ -380,6 +418,10 @@ def search(request):
     context = RequestContext(request)
     result_list = []
 
+    cat_list = get_category_list()
+    context_dict = {'result_list': result_list}
+    context_dict['cat_list'] = cat_list
+
     if request.method == 'POST':
         query = request.POST['query'].strip()
 
@@ -387,4 +429,20 @@ def search(request):
             # Run our Bing function to get the results list!
             result_list = run_query(query)
 
-    return render_to_response('rango/search.html', {'result_list': result_list}, context)
+    return render_to_response('rango/search.html', context_dict, context)
+
+def get_category_list(max_results=0, starts_with=''):
+    cat_list = []
+    if starts_with:
+        cat_list = Category.objects.filter(name__startswith=starts_with)
+    else:
+        cat_list = Category.objects.all()
+
+    if max_results > 0:
+        if (len(cat_list) > max_results):
+            cat_list = cat_list[:max_results]
+
+    for cat in cat_list:
+        cat.url = encode_url(cat.name)
+
+    return cat_list
