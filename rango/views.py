@@ -356,9 +356,20 @@ def about(request):
     # If the visits session varible exists, take it and use it.
     # If it doesn't, we haven't visited the site so set the count to zero.
 
-    count = request.session.get('visits',0)
+    count = request.session.get('session_visits',0)
 
     context_dict['visit_count'] = count
+
+
+    if request.session.get('session_last_visit'):
+        # The session has a value for the last visit
+        session_last_visit_time = request.session.get('session_last_visit')
+        session_visits = request.session.get('session_visits', 0)
+        if (datetime.now() - datetime.strptime(session_last_visit_time[:-7], "%Y-%m-%d %H:%M:%S")).seconds > 5:
+            request.session['session_visits'] = session_visits + 1
+            request.session['session_last_visit'] = str(datetime.now())
+        context_dict['last_visit_print'] = str(session_last_visit_time[:-7])
+
 
     # Return and render the response, ensuring the count is passed to the template engine.
     return render_to_response('rango/about.html', context_dict , context)

@@ -39,29 +39,19 @@
         <h2>0710 Javascript Training: Search</h2>
 
         <script>
-            function changePg(type){
-{#                var go = document.getElementById("go");#}
-{#                var img = document.getElementById("img");#}
-                document.getElementById('go').innerHTML = 'page search';
-
-            }
-            function changeImg(type){
-{#                var go = document.getElementById("go");#}
-                document.getElementById('go').innerHTML = 'image search';
-            }
+            function changePg(type){ document.getElementById('go').innerHTML = 'website search'; }
+            function changeImg(type){ document.getElementById('go').innerHTML = 'image search'; }
             function search(type){
-                document.getElementById('go').innerHTML = 'go';
-                url = "http://" + "www.google.com" + "/search?q=" + document.getElementById('text').value;
-                if ( document.getElementById('text').value == "image search"){ window.location.assign(url); }
-                else { window.location.assign(url); }
+                if ( document.getElementById('go').innerHTML === "website search"){ window.location.assign("http://" + "www.google.com" + "/search?q=" + document.getElementById('text').value); }
+                else { window.location.assign("https://www.google.com/search?hl=en&site=imghp&tbm=isch&source=hp&q=" + document.getElementById('text').value); }
             }
 
         </script>
         <div class="btn-toolbar" role="toolbar">
             <p>
             <div class="btn-group">
-              <button type="button" class="btn btn-default" id="img" onclick="changePg()">Image Search</button>
-              <button type="button" class="btn btn-default" id="pg" onclick="changeImg()">Website Search</button>
+              <button type="button" class="btn btn-default" id="img" onclick="changeImg()">Image Search</button>
+              <button type="button" class="btn btn-default" id="pg" onclick="changePg()">Website Search</button>
             </div>
             </p>
             <br/>
