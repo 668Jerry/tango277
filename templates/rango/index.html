@@ -36,7 +36,57 @@
         <strong>No pages at present.</strong>
         {% endif %}
 
-    </div>
+        <h2>0710 Javascript Training: Search</h2>
+
+        <script>
+            function changePg(type){
+{#                var go = document.getElementById("go");#}
+{#                var img = document.getElementById("img");#}
+                document.getElementById('go').innerHTML = 'page search';
+
+            }
+            function changeImg(type){
+{#                var go = document.getElementById("go");#}
+                document.getElementById('go').innerHTML = 'image search';
+            }
+            function search(type){
+                document.getElementById('go').innerHTML = 'go';
+                url = "http://" + "www.google.com" + "/search?q=" + document.getElementById('text').value;
+                if ( document.getElementById('text').value == "image search"){ window.location.assign(url); }
+                else { window.location.assign(url); }
+            }
+
+        </script>
+        <div class="btn-toolbar" role="toolbar">
+            <p>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" id="img" onclick="changePg()">Image Search</button>
+              <button type="button" class="btn btn-default" id="pg" onclick="changeImg()">Website Search</button>
+            </div>
+            </p>
+            <br/>
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="text">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" id="go" type="button" onclick="search()">Go!</button>
+                  </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+            </div><!-- /.row -->
+
+
+        </div>
+
+        <script>
+            function callImg(type){document.getElementById('makeImg').appendChild('img') = 'go';}
+        </script>
+        <h2>Click to Add Image</h2>
+        <div id="newImg"></div>
+        <button type="button" class="btn btn-default btn-lg" id="makeImg" onclick="callImg()">
+            <span class="glyphicon glyphicon-star"></span> Star
+        </button>
     <!--/span-->
 </div><!--/row-->
 
