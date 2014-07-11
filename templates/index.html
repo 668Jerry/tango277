@@ -1,4 +1,4 @@
-{% extends "rango/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Welcome to Django!{% endblock %}
 
@@ -15,7 +15,7 @@
         {% if categories %}
         <ul>
             {% for category in categories %}
-            <li><a href="/rango/category/{{ category.name }}">{{ category.name }}</a></li>
+            <li><a href="/category/{{ category.name }}">{{ category.name }}</a></li>
             {% endfor %}
         </ul>
         {% else %}

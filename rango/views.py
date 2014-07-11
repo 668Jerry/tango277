@@ -62,7 +62,7 @@ def index(request):
 #    return render_to_response('rango/index.html', context_dict, context)
     #### NEW CODE ####
     # Obtain our Response object early so we can add cookie information.
-    response = render_to_response('rango/index.html', context_dict, context)
+    response = render_to_response('index.html', context_dict, context)
 
     # Get the number of visits to the site.
     # We use the COOKIES.get() function to obtain the visits cookie.
@@ -115,7 +115,7 @@ def index(request):
 def evil(request):
     context = RequestContext(request)
     context_dict = {}
-    return render_to_response('rango/evil.html', context_dict, context)
+    return render_to_response('evil.html', context_dict, context)
 
 def category(request, category_name_url):
     # Request our context from the request passed to us.
@@ -156,7 +156,7 @@ def category(request, category_name_url):
         pass
 
     # Go render the response and return it to the client.
-    return render_to_response('rango/category.html', context_dict, context)
+    return render_to_response('category.html', context_dict, context)
 
 # def about(request):
 #     # Request the context.
@@ -205,7 +205,7 @@ def add_category(request):
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
-    return render_to_response('rango/add_category.html', context_dict, context)
+    return render_to_response('add_category.html', context_dict, context)
 
 from rango.forms import PageForm
 
@@ -232,7 +232,7 @@ def add_page(request, category_name_url):
             except Category.DoesNotExist:
                 # If we get here, the category does not exist.
                 # Go back and render the add category form as a way of saying the category does not exist.
-                return render_to_response('rango/add_category.html', {}, context)
+                return render_to_response('add_category.html', {}, context)
 
             # Also, create a default value for the number of views.
             page.views = 0
@@ -253,7 +253,7 @@ def add_page(request, category_name_url):
     context_dict['cat_list'] = cat_list
 
 
-    return render_to_response( 'rango/add_page.html', context_dict, context)
+    return render_to_response('templates/add_page.html', context_dict, context)
 
 from rango.forms import UserForm, UserProfileForm
 
@@ -317,7 +317,7 @@ def register(request):
 
     # Render the template depending on the context.
     return render_to_response(
-            'rango/register.html',
+        'register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
             context)
 
@@ -348,7 +348,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/rango/')
+                return HttpResponseRedirect('/')
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your Rango account is disabled.")
@@ -362,7 +362,7 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render_to_response('rango/login.html', {}, context)
+        return render_to_response('login.html', {}, context)
 
 from django.contrib.auth.decorators import login_required
 @login_required
@@ -378,7 +378,7 @@ def user_logout(request):
     logout(request)
 
     # Take the user back to the homepage.
-    return HttpResponseRedirect('/rango/')
+    return HttpResponseRedirect('/')
 
 
 def about(request):
@@ -410,7 +410,7 @@ def about(request):
 
 
     # Return and render the response, ensuring the count is passed to the template engine.
-    return render_to_response('rango/about.html', context_dict , context)
+    return render_to_response('about.html', context_dict , context)
 
 from rango.bing_search import run_query
 
@@ -427,7 +427,7 @@ def search(request):
     cat_list = get_category_list()
     context_dict = {'result_list': result_list}
     context_dict['cat_list'] = cat_list
-    return render_to_response('rango/search.html', context_dict, context)
+    return render_to_response('search.html', context_dict, context)
 
 
 def get_category_list(max_results=0, starts_with=''):
@@ -495,4 +495,4 @@ def profile(request):
     # # context_dict['user'] = u
     # # context_dict['userprofile'] = up
     # return render_to_response('rango/profile.html', context_dict, context)
-        return render_to_response('rango/profile.html', context_dict , context)
+        return render_to_response('profile.html', context_dict , context)

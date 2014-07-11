@@ -146,5 +146,5 @@ DATABASES = {
     }
 }
 
-LOGIN_URL = '/rango/login/'
+LOGIN_URL = '/login/'
 #

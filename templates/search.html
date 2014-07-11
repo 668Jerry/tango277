@@ -1,4 +1,4 @@
-{% extends "rango/base.html" %}
+{% extends "base.html" %}
 
 {% load static %}
 
@@ -10,7 +10,7 @@
     <br/>
 
     <div class="container-fluid">
-        <form class="form-signin span8" id="user_form" method="post" action="/rango/search/">
+        <form class="form-signin span8" id="user_form" method="post" action="/search/">
             {% csrf_token %}
             <!-- Display the search form elements here -->
             <input type="text" size="50" name="query" value="" id="query" />

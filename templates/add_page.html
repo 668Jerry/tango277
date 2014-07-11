@@ -1,4 +1,4 @@
-{% extends "rango/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Register with Rango{% endblock %}
 
@@ -13,7 +13,7 @@
         {% if not category_name_url %}
             <div style="color: red;">The specified category does not exist!</div>
         {% else %}
-            <form class="col-md-6" id="page_form" method="post" action="/rango/category/{{category_name_url}}/add_page/">
+            <form class="col-md-6" id="page_form" method="post" action="/category/{{category_name_url}}/add_page/">
                 {% csrf_token %}
                 {% for hidden in form.hidden_fields %}
                 {{ hidden }}
