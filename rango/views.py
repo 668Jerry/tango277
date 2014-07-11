@@ -418,18 +418,17 @@ def search(request):
     context = RequestContext(request)
     result_list = []
 
-    cat_list = get_category_list()
-    context_dict = {'result_list': result_list}
-    context_dict['cat_list'] = cat_list
-
     if request.method == 'POST':
         query = request.POST['query'].strip()
 
         if query:
             # Run our Bing function to get the results list!
             result_list = run_query(query)
-
+    cat_list = get_category_list()
+    context_dict = {'result_list': result_list}
+    context_dict['cat_list'] = cat_list
     return render_to_response('rango/search.html', context_dict, context)
+
 
 def get_category_list(max_results=0, starts_with=''):
     cat_list = []
@@ -446,3 +445,54 @@ def get_category_list(max_results=0, starts_with=''):
         cat.url = encode_url(cat.name)
 
     return cat_list
+
+from django.contrib.auth.models import User
+from rango.models import UserProfile
+
+
+@login_required
+def profile(request):
+    # Request the context.
+    context = RequestContext(request)
+    context_dict = {}
+    # cat_list = get_category_list()
+    # category_list = Category.objects.order_by('-likes')[:5]
+    cat_list = Category.objects.order_by('-likes')[:5]
+    context_dict['cat_list'] = cat_list
+    # If the visits session varible exists, take it and use it.
+    # If it doesn't, we haven't visited the site so set the count to zero.
+
+    count = request.session.get('session_visits',0)
+
+    context_dict['visit_count'] = count
+
+    cat_list = get_category_list()
+    context_dict['cat_list'] = cat_list
+
+    if request.session.get('session_last_visit'):
+        # The session has a value for the last visit
+        session_last_visit_time = request.session.get('session_last_visit')
+        session_visits = request.session.get('session_visits', 0)
+        if (datetime.now() - datetime.strptime(session_last_visit_time[:-7], "%Y-%m-%d %H:%M:%S")).seconds > 5:
+            request.session['session_visits'] = session_visits + 1
+            request.session['session_last_visit'] = str(datetime.now())
+        context_dict['last_visit_print'] = str(session_last_visit_time[:-7])
+
+
+    # Return and render the response, ensuring the count is passed to the template engine.
+    # return render_to_response('rango/about.html', context_dict , context)
+
+    # context = RequestContext(request)
+    # # cat_list = get_category_list()
+    # # context_dict = {'cat_list': cat_list}
+    # # u = User.objects.get(username=request.user)
+    # #
+    # # try:
+    # #     up = UserProfile.objects.get(user=u)
+    # # except:
+    # #     up = None
+    # #
+    # # context_dict['user'] = u
+    # # context_dict['userprofile'] = up
+    # return render_to_response('rango/profile.html', context_dict, context)
+        return render_to_response('rango/profile.html', context_dict , context)
