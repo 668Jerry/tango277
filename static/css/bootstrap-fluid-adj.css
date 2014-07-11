@@ -1,4 +1,4 @@
-body {
+body.class-no-padding {
 padding-top: 0px;
 /*padding-bottom: 40px;*/
 }
@@ -32,10 +32,6 @@ li.navbar-text{
     /*padding-top: 0px;*/
 }
 
-.pull-right>.nav>li{
-    /*text-align: center;*/
-}
-
 button.navbar-toggle{
     /*background-color: red;*/
     /*background: red;*/
@@ -45,4 +41,8 @@ button.navbar-toggle{
 .navbar.navbar-static-top.bs-docs-nav {
     background-color: #000000;
     background-image: none;
+}
+
+.navbar-text {
+    color:coral;
 }
