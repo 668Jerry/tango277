@@ -118,42 +118,41 @@ def evil(request):
     return render_to_response('evil.html', context_dict, context)
 
 def category(request, category_name_url):
-    # Request our context from the request passed to us.
+    # Request our context
     context = RequestContext(request)
 
     # Change underscores in the category name to spaces.
-    # URLs don't handle spaces well, so we encode them as underscores.
-    # We can then simply replace the underscores with spaces again to get the name.
-    category_name = category_name_url.replace('_', ' ')
+    # URL's don't handle spaces well, so we encode them as underscores.
+    category_name = decode_url(category_name_url)
 
-    # Create a context dictionary which we can pass to the template rendering engine.
-    # We start by containing the name of the category passed by the user.
-    context_dict = {'category_name': category_name}
-
+    # Build up the dictionary we will use as out template context dictionary.
+    context_dict = {'category_name': category_name, 'category_name_url': category_name_url}
 
     cat_list = get_category_list()
     context_dict['cat_list'] = cat_list
-
-
     try:
-        # Can we find a category with the given name?
-        # If we can't, the .get() method raises a DoesNotExist exception.
-        # So the .get() method returns one model instance or raises an exception.
-        category = Category.objects.get(name=category_name)
-
-        # Retrieve all of the associated pages.
+        # Find the category with the given name.
+        # Raises an exception if the category doesn't exist.
+        # We also do a case insensitive match.
+        category = Category.objects.get(name__iexact=category_name)
+        context_dict['category'] = category
+        # Retrieve all the associated pages.
         # Note that filter returns >= 1 model instance.
-        pages = Page.objects.filter(category=category)
+        pages = Page.objects.filter(category=category).order_by('-views')
 
         # Adds our results list to the template context under name pages.
         context_dict['pages'] = pages
-        # We also add the category object from the database to the context dictionary.
-        # We'll use this in the template to verify that the category exists.
-        context_dict['category'] = category
     except Category.DoesNotExist:
-        # We get here if we didn't find the specified category.
-        # Don't do anything - the template displays the "no category" message for us.
+        # We get here if the category does not exist.
+        # Will trigger the template to display the 'no category' message.
         pass
+
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        if query:
+            query = query.strip()
+            result_list = run_query(query)
+            context_dict['result_list'] = result_list
 
     # Go render the response and return it to the client.
     return render_to_response('category.html', context_dict, context)
@@ -253,7 +252,7 @@ def add_page(request, category_name_url):
     context_dict['cat_list'] = cat_list
 
 
-    return render_to_response('templates/add_page.html', context_dict, context)
+    return render_to_response('add_page.html', context_dict, context)
 
 from rango.forms import UserForm, UserProfileForm
 
