@@ -37,7 +37,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                 <li class="navbar-text">Welcome, {{ user.username }}!</li>
-                <li><a href="/about/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');">Profile</a></li>
+                <li><a href="/profile/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');">Profile</a></li>
                 <li><a href="/logout/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');">Logout</a></li>
                 {% else %}
                 <li class="navbar-text">Good Day!!</li>
