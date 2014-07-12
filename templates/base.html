@@ -12,7 +12,6 @@
     <link href="{% static 'css/bootstrap-theme.min.css'%} " rel="stylesheet" media="screen">
     <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-
     <title>Django - {% block title %}This is a Django page!{% endblock %}</title>
 </head>
 
@@ -23,8 +22,6 @@
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="glyphicon glyphicon-list"></span>
-{#                <span class="icon-bar"></span>#}
-{#                <span class="icon-bar"></span>#}
             </button>
             <a class="navbar-brand" href="/">Django</a>
         </div>
@@ -51,99 +48,26 @@
         </nav>
     </div>
 </header>
-
-{#<li><a href="/rango/restricted/">Restricted</a></li>#}
-
-<!--- <li><a href="/rango/search">Search</a></li> -->
-
-{#        </ul>#}
-{#               <ul class="pull-right col-md-6">#}
-{#                    {% if user.is_authenticated %}#}
-{#                    <ul class="nav nav-pills">#}
-{#                        <li class="navbar-text col-md-4">Welcome, {{ user.username }}!</li>#}
-{#                        <li class="col-md-3"><a href="/about/">Profile</a></li>#}
-{#                        <li class="col-md-3"><a href="/logout/">Logout</a></li>#}
-{#                    </ul>#}
-{#                    {% else %}#}
-{#                    <ul class="nav nav-pills">#}
-{#                        <li class="navbar-text col-md-5">Good Day!!</li>#}
-{#                        <li class="col-md-3"><a href="/register/">Register</a></li>#}
-{#                        <li class="col-md-3"><a href="/login/">Login</a></li>#}
-{#                    </ul>#}
-{#                    {% endif %}#}
-{#               </ul>#}
-
-
-
-
-{#<nav class="navbar navbar-default navbar-static-top" role="navigation">#}
-{#<div class="navbar navbar-inverse navbar-fixed-top">#}
-{#    <div class="navbar-inner">#}
-{#        <div class="container">#}
-{#            <div class="col-md-2"><a class="navbar-brand" href="/">Django</a></div>#}
-{#                <ul class="col-md-4">#}
-{#                    <li><a href="/rango/restricted/">Restricted</a></li>#}
-{#                    <ul class="nav nav-pills">#}
-{#                        <li><a href="http://www.tangowithdjango.com/">TWD</a></li>#}
-{#                        <li><a href="http://www.tangowithdjango.com/book/">Book</a></li>#}
-{#                        <li><a href="/rango/about/">About</a></li>#}
-{#                    </ul>#}
-{##}
-{#                    <!--- <li><a href="/rango/search">Search</a></li> -->#}
-{#                    <ul class="nav nav-pills">#}
-{#                        <li><a href="http://668jerry.com/resume">me</a></li>#}
-{#                        <li><a href="/search/">Search</a></li>#}
-{#                        <li><a href="/about/">About</a></li>#}
-{#                        {% if user.is_authenticated %}#}
-{#                        <li><a href="/add_category/">Add Category</a></li>#}
-{#                        {% endif %}#}
-{#                    </ul>#}
-{#               </ul>#}
-{#               <div class="nav-collapse">#}
-{#               <ul class="nav nav-tabs" role="tablist">#}
-{#  <li class="active"><a href="#">Home</a></li>#}
-{#  <li><a href="#">Profile</a></li>#}
-{#  <li><a href="#">Messages</a></li>#}
-{#</ul>#}
-{#            </div>#}
-{#            <!--/.nav-collapse -->#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-{#</nav>#}
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
                 <div class="well sidebar-nav">
-                    {% include "category_list.html" %}
-                    <ul class="nav nav-list">
-
-                        <li></li>
-                        <li></li>
-{#                        {% block body_block %}#}
-{#                        {% endblock %}#}
-                    </ul>
-{#                    <ul class="nav nav-list">#}
-{#                        <li class="nav-header">Find a Category</li>#}
-{#                        <form>#}
-{#                            <label></label>#}
-{#                            <li><input  class="search-query span10" type="text" name="suggestion" value="" id="suggestion" /></li>#}
-{#                        </form>#}
-{#                    </ul>       #}
+                    {% block sidebar %}
+                    {% endblock %}
+                    <div id="cats">
+                        {% if cat_list %}
+                            <ul class="nav nav-list"><li>Category List</li></ul>
+                            {% include 'category_list.html' with cat_list=cat_list %}
+                        {% endif %}
+                    </div>
                 </div>
-                <!--/.well -->
             </div>
-            <!--/span-->
             <div class="col-md-9">
                 {% block body_block %}
                 {% endblock %}
             </div>
-            <!--/span-->
         </div>
-        <!--/row-->
     </div>
-    <!--/.fluid-container-->
 
     <hr>
 
@@ -154,8 +78,6 @@
             <p>This is Chun-Yi, Kuo.</p>
         </div>
     </footer>
-
-{#    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>#}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
