@@ -546,3 +546,16 @@ def like_category(request):
             category.save()
 
     return HttpResponse(likes)
+
+def suggest_category(request):
+    context = RequestContext(request)
+    cat_list = []
+    starts_with = ''
+    if request.method == 'GET':
+        starts_with = request.GET['suggestion']
+    else:
+        starts_with = request.POST['suggestion']
+
+    cat_list = get_category_list(8, starts_with)
+
+    return render_to_response('category_list.html', {'cat_list': cat_list }, context)
