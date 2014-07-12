@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^evil/$', views.evil, name='evil'),  # New!
     url(r'^about/$', views.about, name='about'),
     url(r'^search/$', views.search, name='search'),
-
+    url(r'^goto/$', views.track_url, name='track_url'),
 )
 
 urlpatterns += patterns('',

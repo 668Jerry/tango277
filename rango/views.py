@@ -150,7 +150,7 @@ def category(request, category_name_url):
     if request.method == 'POST':
         query = request.POST.get('query')
         if query:
-            query = query.strip()
+            query = query.encode('utf-8').strip()
             result_list = run_query(query)
             context_dict['result_list'] = result_list
 
@@ -418,7 +418,7 @@ def search(request):
     result_list = []
 
     if request.method == 'POST':
-        query = request.POST['query'].strip()
+        query = request.POST['query'].encode('utf-8').strip()
 
         if query:
             # Run our Bing function to get the results list!
@@ -511,3 +511,21 @@ def profile(request):
     context_dict['user'] = u
     context_dict['userprofile'] = up
     return render_to_response('profile.html', context_dict, context)
+
+from django.shortcuts import redirect
+
+def track_url(request):
+    context = RequestContext(request)
+    page_id = None
+    url = '/'
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views = page.views + 1
+                page.save()
+                url = page.url
+            except:
+                pass
+    return redirect(url)
