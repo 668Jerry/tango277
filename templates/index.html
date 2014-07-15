@@ -4,23 +4,140 @@
 
 {% block body_block %}
 <div class="jumbotron">
-    <h1>Ready to Django</h1>
+    <h1>Ready</h1>
 
-    <p>Find, Add, Share and Django useful links and resources.</p>
+    <p>to Django.</p>
+        <h2>715 Reveal a Picture</h2>
+        <button type="button" class="btn btn-default btn-md btn-info" onclick="loadImage()">Reveal</button>
+        <div id="revealHere"></div>
+        <script>
+            function loadImage()
+            {
+                var img = document.createElement("img");
+                img.src = "/media/star.png";
+                img.style.width = "200px";
+                document.getElementById("revealHere").appendChild(img);
+            }
+        </script>
 
-            <h2>0714 Array</h2>
+        <h2>715 Picture Change</h2>
+        <img class="block" id="fadeInImg" src="/media/locStar.png">
+        <style type="text/css">
+            .block {width:200px; height:200px; border-radius: 25px;}
+        </style>
+        <script language="javascript" type="text/javascript">
+            var floatTime = 0.0;
+            var shadowNumber = 0;
+            var myFade = setInterval(fade,10);
+            function fade()
+            {
+                if(floatTime + 0.01 >= 1.0){
+                    floatTime = 1.0;
+                    document.getElementById("fadeInImg").style.opacity = "1.0";
+                    document.getElementById("fadeInImg").style.filter = "alpha(opacity=" + floatTime * 100 + ")";
+                    clearInterval(myFade);
+                } else {
+                    floatTime += 0.01;
+                    hexString = (floatTime * 100.0).toString(16);
+                    document.getElementById("fadeInImg").style.opacity = floatTime;
+                    document.getElementById("fadeInImg").style.filter = "alpha(opacity=" + floatTime * 100 + ")";
+                    document.getElementById("fadeInImg").style.boxShadow = "10px 10px 5px #" + hexString + hexString + hexString;
+                }
+            }
+        </script>
+
+        <h2>715 Happy New Year</h2>
+        <div id="left"></div>
+        <script>
+            var d = new Date();
+{#            alert(d.toLocaleDateString() + "," + d.toLocaleTimeString());#}
+            setInterval("updateLeft()", 1000);
+            function updateLeft() {
+                var now = new Date();
+                var start = new Date(now.getFullYear(), 0, 0);
+                var diff = now - start;
+                var oneDay = 1000 * 60 * 60 * 24;
+                var day = Math.floor(diff / oneDay);
+
+                var dt = new Date();
+                var secs = parseInt(dt.getSeconds() + (60 * (dt.getMinutes() + (60 * dt.getHours()))));
+                var leftSecs = 86400 - secs;
+                var leftHour = parseInt(leftSecs / 3600);
+                var leftMinute = parseInt((leftSecs % 3600) / 60);
+                var leftSecs = leftSecs % 60;
+                var leftday = 365 - day;
+
+                document.getElementById("left").innerHTML = "Left" + leftday + "days, " + leftHour + "hours, " + leftMinute + "mins" + leftSecs + "seconds";
+            }
+        </script>
+        <h2>714 Scheduling</h2>
+        <button type="button" class="btn btn-default btn-md btn-warning" onclick="start()" id="counterButton">Initialize</button>
+        <div id="counter"></div>
+        <script type="text/javascript">
+            var clock = 10; var countdownId = 0;
+            var startTime;
+            var currentTime;
+            var motherNumber = 1000000;
+            var counterStart = 0;
+            var counterInterval;
+            function start() { //Start clock
+                if (counterStart == 0)
+                {
+                    counterStart = 1;
+                    document.getElementById("counterButton").innerHTML = "STOP";
+                    document.getElementById("counterButton").className = "btn btn-default btn-md btn-danger";
+                    startTime = parseInt(new Date().getTime());
+                    counterInterval = setInterval("print()", 1);
+                } else {
+                    counterStart = 0;
+                    document.getElementById("counterButton").innerHTML = "START";
+                    document.getElementById("counterButton").className = "btn btn-default btn-md btn-success";
+                    motherNumber = counter;
+                    clearInterval(counterInterval);
+                }
+            }
+            function print(){
+                counter = motherNumber - parseInt(new Date().getTime()) + parseInt(startTime);
+                document.getElementById("counter").innerHTML = counter;
+            }
+        </script>
+
+        <h2>714 Date</h2>
+        <div class="well">
+            <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                <input class="span2" size="16" type="text" value="12-02-2012" readonly="">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+        </div>
+
+    <div class="form-group row">
+  <div class="col-xs-8">
+    <label class="control-label">My Label</label>
+    <div class="input-group date" id="dp3" data-date="12-02-2012" data-date-format="mm-dd-yyyy">
+      <input class="form-control" type="text" readonly="" value="12-02-2012">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    </div>
+  </div>
+</div>
+        <script>
+            var now = new Date();
+            document.write(now);
+        </script>
+
+
+        <h2>0714 Array</h2>
 {#        <div id="average">Average</div>#}
-        <table border="3">
+        <table class="table">
         <script>
             var students = new Array(10);
             var sum = 0;
             document.write("<tr><td>key</td><td>value</td></tr>");
             for(var k = 0; k < students.length; k++){
                 students[k] = new Array(2);
-                students[k][0] = k;
+                students[k][0] = k + 1;
                 students[k][1] = (Math.random() * 100).toFixed(2);
 {#                students[k][0] = k;#}
-{#                sum = sum + students[k][];#}
+                sum = parseFloat(sum) + parseFloat(students[k][1]);
             }
 {#            alert("go");#}
             for(var i = 0; i < students.length; i++)
@@ -33,40 +150,35 @@
                 }
                 document.write("</tr>");
             }
+            document.write("<tr><td>average:</td><td> " + (sum / 10).toFixed(2) + "</td></tr>");
 {#            var average = parseFloat(sum) / parseFloat(k);#}
 {##}
 {#            alert("sum" + sum + ". myArray" + myArray + ". average" + average);#}
         </script>
         </table>
 
-</div>
 
-<div class="row">
-    <div class="col-md-6">
-        <h2>Top Five Categories</h2>
-        {% if categories %}
-        <ul>
-            {% for category in categories %}
-            <li><a href="/category/{{ category.name }}">{{ category.name }}</a></li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <strong>No categories at present.</strong>
-        {% endif %}
+        <h2>0711 Javascript Training: action</h2>
 
-    </div>
-    <!--/span-->
-    <div class="col-md-6">
-        <h2>Top Five Pages</h2>
-        {% if pages %}
-        <ul>
-            {% for page in pages %}
-            <li><a href="{{ page.url}}">{{ page.title }}</a> - {{ page.category}} ({{ page.views }} view(s))</li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <strong>No pages at present.</strong>
-        {% endif %}
+        <script>
+            function revealFirstText(){if(document.getElementById('firstText').style.display === ''){document.getElementById('firstText').style.display = 'none';}else{document.getElementById('firstText').style.display = '';}}
+            function revealSecondText(){if(document.getElementById('secondText').type === 'hidden'){document.getElementById('secondText').type = 'textarea';}else{document.getElementById('secondText').type = 'hidden';}}
+        </script>
+
+        <button type="button" class="btn btn-default btn-lg" onclick="revealFirstText()">
+            <span class="glyphicon glyphicon-star"></span> Star
+        </button>
+        <p>
+            <textarea class="form-control" rows="3" style="display:none" id="firstText"></textarea>
+        </p>
+        <button type="button" class="btn btn-default btn-lg" onclick="revealSecondText()">
+            <span class="glyphicon glyphicon-star"></span> Star
+        </button>
+        <br/>
+            <input class="form-control" rows="3" type="hidden" id="secondText"></input>
+        <br/>
+
+
 
         <h2>0710 Javascript Training: Search</h2>
 
@@ -109,9 +221,125 @@
         <button type="button" class="btn btn-default btn-lg" id="makeImg" onclick="callImg()">
             <span class="glyphicon glyphicon-star"></span> Star
         </button>
+
+
+
+        <h2>0707 Form for Registering</h2>
+
+        <form class="form-horizontal" id="registerHere" method='post' action=''>
+        <fieldset>
+
+        <legend>Registration</legend>
+
+        <div class="control-group">
+        <label class="control-label">Name</label>
+        <div class="controls">
+        <input type="text" class="input-xlarge" id="user_name" name="user_name" rel="popover" data-content="Enter your first and last name." data-original-title="Full Name">
+        </div>
+        </div>
+
+
+        <div class="control-group">
+        <label class="control-label">Email</label>
+        <div class="controls">
+        <input type="text" class="input-xlarge" id="user_email" name="user_email" rel="popover" data-content="What’s your email address?" data-original-title="Email">
+        </div>
+        </div>
+
+        .............
+        .............
+
+        <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+        <button type="submit" class="btn btn-success" >Create My Account</button>
+        </div>
+        </div>
+
+        </fieldset>
+        </form>
+        <!-- Include Bootstrap Asserts JavaScript Files. -->
+        <script type="text/javascript" src="jquery.validate.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function()
+        {
+        // Popover
+        $('#registerHere input').hover(function()
+        {
+        $(this).popover('show')
+        });
+
+        // Validation
+        $("#registerHere").validate({
+        rules:{
+        user_name:"required",
+        user_email:{required:true,email: true},
+        pwd:{required:true,minlength: 6},
+        cpwd:{required:true,equalTo: "#pwd"},
+        gender:"required"
+        },
+
+        messages:{
+        user_name:"Enter your first and last name",
+        user_email:{
+        required:"Enter your email address",
+        email:"Enter valid email address"},
+        pwd:{
+        required:"Enter your password",
+        minlength:"Password must be minimum 6 characters"},
+        cpwd:{
+        required:"Enter confirm password",
+        equalTo:"Password and Confirm Password must match"},
+        gender:"Select Gender"
+        },
+
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass)
+        {
+        $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass)
+        {
+        $(element).parents('.control-group').removeClass('error');
+        $(element).parents('.control-group').addClass('success');
+        }
+        });
+        });
+        </script>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Top Five Categories</h2>
+        {% if categories %}
+        <ul>
+            {% for category in categories %}
+            <li><a href="/category/{{ category.name }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>No categories at present.</strong>
+        {% endif %}
+
+    </div>
+    <!--/span-->
+    <div class="col-md-6">
+        <h2>Top Five Pages</h2>
+        {% if pages %}
+        <ul>
+            {% for page in pages %}
+            <li><a href="{{ page.url}}">{{ page.title }}</a> - {{ page.category}} ({{ page.views }} view(s))</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>No pages at present.</strong>
+        {% endif %}
+
     <!--/span-->
 </div><!--/row-->
-
 
 {% endblock %}
 {#<!DOCTYPE html>#}
