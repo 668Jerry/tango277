@@ -7,6 +7,64 @@
     <h1>Ready</h1>
 
     <p>to Django.</p>
+
+        <h2>716 Check Start with</h2>
+        <div class="col-lg-12">
+        <div class="input-group">
+            <input type="text" id="fullString" value="Good Morning">Please input a string.
+            <br/>
+            <input type="text" id="pieceString" value="Good">Please input a substring of the front string.
+            <br/>
+            <button class="btn btn-default" type="button" onclick="checkSubstring()">Check!!</button>
+            <span class="input-group-btn">
+
+            </span>
+            <div id="whetherSubstring"></div>
+        </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <br/>
+        <script>
+            function checkSubstring()
+            {
+                var fullString = document.getElementById("fullString").value;
+                var pieceString = document.getElementById("pieceString").value;
+                if(fullString.substring(0, pieceString.length) === pieceString)
+                {
+                    alert("true");
+                }else {
+                    alert("false");
+                }
+{#                document.getElementById("whetherSubstring").innerHTML = fullString.start.startsWith( "hello" )#}
+            }
+        </script>
+        <br/>
+
+
+        <h2>716 String Reverse</h2>
+        <div class="col-lg-12">
+        <div class="input-group">
+          <input type="text" class="form-control" id="inputString" value="12345">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="reverseString()">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <br/>
+        <script>
+            function reverseString()
+            {
+                var myString = document.getElementById("inputString").value;
+                var outputString = "";
+                for(var i = 0; i< myString.length; i++)
+                {
+                   outputString += myString[myString.length - 1 -i];
+                }
+{#                alert(outputString);#}
+                document.getElementById("inputString").value = outputString;
+                alert("hello world".startsWith( "hello" ));
+            }
+        </script>
+
         <h2>715 Reveal a Picture</h2>
         <button type="button" class="btn btn-default btn-md btn-info" onclick="loadImage()">Reveal</button>
         <div id="revealHere"></div>
