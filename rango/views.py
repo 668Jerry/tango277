@@ -581,3 +581,8 @@ def auto_add_page(request):
             context_dict['pages'] = pages
 
     return render_to_response('page_list.html', context_dict, context)
+
+def fb(request):
+    context = RequestContext(request)
+    context_dict = {}
+    return render_to_response('fb.html', context_dict, context)
