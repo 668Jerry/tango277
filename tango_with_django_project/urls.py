@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     url(r'^auto_add_page/$', views.auto_add_page, name='auto_add_page'),
     # url(r'^list/$', 'list', name='list'),
     url(r'^fb/$', views.fb, name='fb'),
+    url(r'^brand/$', views.brand, name='brand'),
 )
 
 urlpatterns += patterns('',

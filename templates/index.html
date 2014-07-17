@@ -7,6 +7,120 @@
     <h1>Ready</h1>
 
     <p>to Django.</p>
+        <article>
+        <h2>717 onsubmit</h2>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" placeholder="Name">
+                <br/>
+                <input type="email" class="form-control" placeholder="Email" id="emailCheck">
+                <br/>
+                <input type="text" class="form-control" placeholder="Location">
+                <br/>
+                <span>Prefer food</span>
+                <input type="radio" name="food" /> Taiwan
+                <input type="radio" name="food" /> Italian
+                <input type="radio" name="food" /> Japan
+                <input type="radio" name="food" /> France
+                <br>
+                <button type="submit" class="btn btn-default" onclick="radioTest()">Submit</button>
+            </div>
+
+        </form>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+
+        <script>
+            function validateEmail(email) {
+                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            }
+            function radioTest()
+            {
+                if (document.getElementById("emailCheck").value == '')
+                {
+                    alert('Email address is empty.');
+                }
+                else if (!validateEmail(document.getElementById("emailCheck")))
+                {
+                    alert('Please enter a valid email address.');
+                }
+            }
+        </script>
+        </article>
+        <br/>
+        <br/>
+        <h2>717 Store Finding</h2>
+        <script>
+
+        </script>
+
+        <h2>717 User</h2>
+        <script>
+            function Player(username, age, phone_num){
+                this.username = username;
+                this.age = age;
+                this.phone_num = phone_num;
+            }
+            var o = {a:[new Player("ply", 20, "123456"), new Player("John", 19, "98765")]};
+            for (var i = 1; i < 2; i++) {
+                document.write("UserName: " + o.a[i].username + "<hr/>");
+                document.write("Age: " + o.a[i].age + "<hr/>");
+                document.write("Phone number: " + o.a[i].phone_num + "<hr/>");
+                document.write("<hr/>");
+            }
+        </script>
+
+        <h2>717 Sent to Google</h2>
+        <script type="text/javascript">
+            function getBrand(country){
+                var handler = function(req){
+                    var obj = document.getElementById("content");
+                    obj.innerHTML = req.responseText;//伺服器回傳內容
+                }
+                ajaxRequest("post", "getBrand.jsp", "country=" + country, handler);
+            }
+            function ajaxRequest(method, src, args, callback){
+                var req;
+                if(window.XMLHttpRequest){
+                    req = ...;// 適用於 IE7以上 以及 Firefox
+                }else{
+                    req = ...// 適用於 IE6
+                }
+
+                req.onreadystatechange = function(){ //當 readyState 改變時則觸發
+                    if(req.readyState == 4){ //4 代表處理完畢, 伺服器會傳一個 Status Code
+                        if(req.status == 200){ //Code 存在status屬性中。
+                            callback(req);
+                        }else{
+                            alert(req.status);
+                        }
+                    }
+                }
+
+                if(method.toLowerCase() == "get"){
+                    req.open(method, src + "?" + args, true);//設定 Request 基本相關資訊
+                    req.send(null);
+                }else{
+                    req.open(method, src, true);//設定 Request 基本相關資訊
+                    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//設定 Request 的 Header
+                    req.send(args);//根據以上資訊。真正送出 Request 給伺服器
+                }
+            }
+        </script>
+        <div>
+            <span onmouseover="getBrand('taiwan');">台灣</span>
+            <span onmouseover="getBrand('america');">美國</span>
+        </div>
+        <div id="content"></div>
+
+
 
         <h2>716 Random Number Generate</h2>
         <button type="button" class="btn btn-default btn-md btn-primary" onclick="generateRandomNumber()">

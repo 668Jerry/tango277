@@ -586,3 +586,8 @@ def fb(request):
     context = RequestContext(request)
     context_dict = {}
     return render_to_response('fb.html', context_dict, context)
+
+def brand(request):
+    context = RequestContext(request)
+    context_dict = {}
+    return render_to_response('brand.html', context_dict, context)
