@@ -33,6 +33,7 @@ urlpatterns = patterns('',
     # url(r'^list/$', 'list', name='list'),
     url(r'^fb/$', views.fb, name='fb'),
     url(r'^brand/$', views.brand, name='brand'),
+    url(r'^moveImage/$', views.moveImage, name='moveImage'),
 )
 
 urlpatterns += patterns('',

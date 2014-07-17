@@ -339,7 +339,6 @@
 
 
         <h2>0714 Array</h2>
-{#        <div id="average">Average</div>#}
         <table class="table">
         <script>
             var students = new Array(10);
@@ -349,35 +348,27 @@
                 students[k] = new Array(2);
                 students[k][0] = k + 1;
                 students[k][1] = (Math.random() * 100).toFixed(2);
-{#                students[k][0] = k;#}
                 sum = parseFloat(sum) + parseFloat(students[k][1]);
             }
-{#            alert("go");#}
             for(var i = 0; i < students.length; i++)
             {
-{#                alert("go");#}
                 document.write("<tr>");
-{#                document.write("abcde");#}
                 for (var j = 0; j < students[i].length; j++) {
                     document.write("<td>" + students[i][j] + "</td>");
                 }
                 document.write("</tr>");
             }
             document.write("<tr><td>average:</td><td> " + (sum / 10).toFixed(2) + "</td></tr>");
-{#            var average = parseFloat(sum) / parseFloat(k);#}
-{##}
-{#            alert("sum" + sum + ". myArray" + myArray + ". average" + average);#}
         </script>
         </table>
 
 
         <h2>0711 Javascript Training: action</h2>
-
+        <h3>修改 HTML DOM, 創造影像標籤, 測試 Primitive/Reference Type 兩類資料型態的不同, 測試Call by vlaue & Call by reference的不同, 消失的對話方塊, 除 if else 外的兩種狀態小實驗, 滑鼠拖曳小方塊(固定拖曳處 100:100), bonus:滑鼠拖曳小方塊(點擊處即拖曳處)</h3>
         <script>
             function revealFirstText(){if(document.getElementById('firstText').style.display === ''){document.getElementById('firstText').style.display = 'none';}else{document.getElementById('firstText').style.display = '';}}
             function revealSecondText(){if(document.getElementById('secondText').type === 'hidden'){document.getElementById('secondText').type = 'textarea';}else{document.getElementById('secondText').type = 'hidden';}}
         </script>
-
         <button type="button" class="btn btn-default btn-lg" onclick="revealFirstText()">
             <span class="glyphicon glyphicon-star"></span> Star
         </button>
@@ -390,27 +381,20 @@
         <br/>
             <input class="form-control" rows="3" type="hidden" id="secondText"></input>
         <br/>
-
+        <a href="/moveImage">move image</a>
 
 
         <h2>0710 Javascript Training: Search</h2>
-
-        <script>
-            function changePg(type){ document.getElementById('go').innerHTML = 'website search'; }
-            function changeImg(type){ document.getElementById('go').innerHTML = 'image search'; }
-            function search(type){
-                if ( document.getElementById('go').innerHTML === "website search"){ window.location.assign("http://" + "www.google.com" + "/search?q=" + document.getElementById('text').value); }
-                else { window.location.assign("https://www.google.com/search?hl=en&site=imghp&tbm=isch&source=hp&q=" + document.getElementById('text').value); }
-            }
-
-        </script>
+        <h3>創造一個物件&屬性&嘗試操作。定義一個 Line 類別, 判斷兩條線是不是平行。搜尋類型的文字變換</h3>
         <div class="btn-toolbar" role="toolbar">
             <p>
-            <div class="btn-group">
+            <div class="btn-group col-md-12">
               <button type="button" class="btn btn-default" id="img" onclick="changeImg()">Image Search</button>
               <button type="button" class="btn btn-default" id="pg" onclick="changePg()">Website Search</button>
             </div>
             </p>
+            <br/>
+            <br/>
             <br/>
             <div class="row">
               <div class="col-lg-8">
@@ -422,10 +406,16 @@
                 </div><!-- /input-group -->
               </div><!-- /.col-lg-6 -->
             </div><!-- /.row -->
-
-
         </div>
+        <script>
+            function changePg(type){ document.getElementById('go').innerHTML = 'website search'; }
+            function changeImg(type){ document.getElementById('go').innerHTML = 'image search'; }
+            function search(type){
+                if ( document.getElementById('go').innerHTML === "website search"){ window.location.assign("http://" + "www.google.com" + "/search?q=" + document.getElementById('text').value); }
+                else { window.location.assign("https://www.google.com/search?hl=en&site=imghp&tbm=isch&source=hp&q=" + document.getElementById('text').value); }
+            }
 
+        </script>
         <script>
             function callImg(type){document.getElementById('makeImg').appendChild('img') = 'go';}
         </script>
@@ -435,9 +425,61 @@
             <span class="glyphicon glyphicon-star"></span> Star
         </button>
 
+        <button type="button" class="btn btn-default btn-lg" onclick="checkParallel()">
+            <span class="glyphicon glyphicon-star"></span>parallel
+        </button>
+        <script>
+            function getLineObject(x1,y1,x2,y2){var line = new Object();line.x1=x1;line.y1=y1;line.x2=x2;line.y2=y2;return line;}
+            function para(line1,line2){if(parseFloat(line1.x2-line1.x1)/parseFloat(line1.y2-line1.y1) == parseFloat(line2.x2-line2.x1)/parseFloat(line2.y2-line2.y1)){alert("parallel");}else{alert("((" + line1.x1 + ", " + line1.y1 + "), (" + line1.x2 + ", " + line1.y2 + ")), " + "((" + line2.x1 + ", " + line2.y1 + "), (" + line2.x2 + ", " + line2.y2 + "))" + "not parallel");}}
+            function checkParallel() {
+                var myLine = getLineObject(2, 2, 5, 5);
+                var myLine5 = getLineObject(3, 8, 5 - 2, 7);
+                para(myLine, myLine5);
+            }
+        </script>
 
+
+        <h2>0709 var</h2>
+        <h3>JS乘法練習+簡單的計算機</h3>
+        <h3>判斷數字是否為質數、判斷是否為質數的程式功能包裝成一個函式</h3>
+        Please Input an Integer.
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="input-group">
+              <input type="text" class="form-control" id="numberToPrime">
+              <span class="input-group-btn">
+                <button class="btn btn-default" id="go" type="button" onclick="isPrime()">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+        <script>
+            function isPrime()
+            {
+                var p = document.getElementById("numberToPrime").value;
+                if (p >= 3) {
+                    for (var i = 2; i < p - 1; i++) {
+                        if (p % i == 0) {
+                            alert("Not Prime");
+                            return 0;
+                        }
+                    }
+                    alert("Prime");
+                }else if(p == 1 || p == 0) {
+                    alert("Not Prime");
+                }else {
+                    alert("Prime");
+                }
+            }
+        </script>
+
+
+
+        <h2>0708 CSS</h2>
+        <h3>前景與背景圖片與漸層+樣式選擇器+外部的 CSS 樣式表</h3>
 
         <h2>0707 Form for Registering</h2>
+        <h3>1. 個人會員註冊表單、個人首頁</h3>
 
         <form class="form-horizontal" id="registerHere" method='post' action=''>
         <fieldset>
