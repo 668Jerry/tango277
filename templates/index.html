@@ -5,6 +5,157 @@
 {% block body_block %}
 <div class="jumbotron">
         <article>
+        <div class="clearfix">
+            <h2>718 Black Jack</h2>
+            <table border="1" id="tblDealer">
+            <tr>    <td width="68" height="90"><img border="0" src="/static/img/CardImages/0.jpg" width="65" height="87" name="g01"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="g02"></td>
+                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="g03"></td>
+                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="g04"></td>
+                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="g05"></td>
+            </tr>
+            </table>
+            <table border="1" id="tblPlayer">
+            <tr>    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p01"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p02"></td>
+                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="p03"></td>
+                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="p04"></td>
+                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="p05"></td>
+            </tr>
+            </table>
+    <br />
+    莊家：<input type=text name = "gsc" value = "0"><br />
+    <br />
+    玩家：<input type=text name = "psc" value = "0"><br />
+    <br />
+            <input type="button" value="發牌" name="btnNewCard" onclick="sendcard()">
+            <input type="button" value="開牌" name="btnDeal" onclick="opencard()">
+            <script language="JavaScript">start();</script>
+
+
+            <h2>718 canvas clip</h2>
+            <canvas id="myCanvasClip" width="400" height="300"></canvas>
+{#            <img src="https://projects.vrac.iastate.edu/REU2013/wp-content/uploads/2013/07/mario_8_bit_by_dmatth-d51bd46.png" alt=""/>#}
+            <script>
+                var canvas = document.getElementById("myCanvasClip");
+                var context = canvas.getContext("2d");
+                context.beginPath();
+                context.moveTo(0, 100);
+                context.arc(120, 80, 80, 0, 360 * Math.PI/ 180, true);
+                context.clip();
+                var image = document.createElement("img");
+                image.onload= function() {context.drawImage(image, 0, 0);}
+{#                image.src = "/static/img/mario.png";#}
+{#                image.src = "/static/img/XD.PNG";#}
+                image.src = "https://projects.vrac.iastate.edu/REU2013/wp-content/uploads/2013/07/mario_8_bit_by_dmatth-d51bd46.png";
+                context.stroke();
+            </script>
+
+            <h2>718 canvas basic</h2>
+            <canvas id="myCanvas" width="600" height="300" style="border:1px solid #d3d3d3;">Your browser does not support the HTML5 canvas tag.</canvas>
+            <script>
+                var canvas = document.getElementById("myCanvas");
+                var context = canvas.getContext("2d");
+                context.font= "italic bold 30px 新細明體";
+                context.textAlign= "start";
+                context.strokeText("HTML5おはよう", 200, 50);
+                context.textAlign= "center";
+                context.fillText("HTML5おはよう", 200, 150);
+                context.shadowBlur=5;
+                context.shadowOffsetX=10;
+                context.shadowOffsetY=10;
+                context.translate(200,190);
+                context.rotate(2);
+                context.shadowColor="gray";
+                context.fillStyle="orange";
+                context.fillRect(20,20,100,80);
+            </script>
+
+            <h2>718 proposing questions</h2>
+            <form action="#" onsubmit="return GenExam(this);">
+{#            <form name="myForm" action="GemExam()">#}
+                <ol>
+                    <li>題目：<input size="70" name="txtQ1">
+                        <br/>
+                        題型：<input type="radio" checked value="V11" name="R1">單選
+                        <input type="radio" value="V12" name="R1">複選 &nbsp; &nbsp; &nbsp;
+                        題目格式：<input name="Q1Red" type="checkbox">紅色
+                        <br />
+                        選項一：<input size="38" name="txtQ1Op1"><br>
+                        選項二：<input size="38" name="txtQ1Op2"><br>
+                        選項三：<input size="38" name="txtQ1Op3"><br>
+                        選項四：<input size="38" name="txtQ1Op4">
+                    </li>
+                </ol>
+                <p>
+                    <input type="button" class="btn-danger" value="送出" name="B1" onclick="GenExam(this.form)">
+                    <input onclick="ClearContent(this.form)" class="btn-warning" type="reset" value="清除" name="B2"></p>
+            </form>
+            <script language="JavaScript" type="text/javascript">
+                function GenExam (myFrm)
+                {
+                    alert("go");
+                    subWin=window.open('','newWin1');
+                    subWin.document.open();
+                    subWin.document.write( "<h1>測驗題目</h1>" );
+                    subWin.document.write( "<OL>" );
+                    subWin.document.write( "<font " );
+                    if(myFrm.Q1Red.checked)
+                        subWin.document.write("color=red");
+                    subWin.document.write( "><LI>" + myFrm.txtQ1.value + "</font>");
+                        subWin.document.write( "<OL TYPE = A>" );
+
+                        if(myFrm.R1[0].checked)
+                            se = "<input type='radio' name='rad' ></input>"
+                        else
+                            se = "<input type='checkbox' name='che'></input>"
+                        subWin.document.write( "<form>" );
+                        subWin.document.write( "<LI>" + ... + myFrm.txtQ1Op1.va...);
+                        subWin.document.write( "<LI>" + ... + myFrm.txtQ1Op2.va...);
+                        subWin.document.write( "<LI>" + ... + myFrm.txtQ1Op3.va...);
+                        subWin.document.write( "<LI>" + ... + myFrm.txtQ1Op4.va...);
+                        subWin.document.write( "</form>" );
+                        subWin.document.write( "</OL>");
+                    subWin.document.write( "</OL>");
+
+                    //subWin.document.write(myFrm.txtQ1.value)
+                }
+            </script>
+        </div>
+
+        <div class="clearfix">
+        <h2>718 Sent to New Page</h2>
+        <form class="navbar-form navbar-left" role="search" name="myForm">
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" placeholder="Name" name="name">
+                <br/>
+                <input type="email" class="form-control" placeholder="Email">
+                <br/>
+                <input type="text" class="form-control" placeholder="Location">
+                <br/>
+                <span>Prefer food</span>
+                <input type="radio" name="food" /> Taiwan
+                <input type="radio" name="food" /> Italian
+                <input type="radio" name="food" /> Japan
+                <input type="radio" name="food" /> France
+                <br>
+                <button type="submit" class="btn btn-default" onclick="openDocument()">Submit</button>
+            </div>
+        </form>
+        <script>
+            function openDocument()
+            {
+                var showText += "<br/>您住在：";
+                var ind = myForm.mySelect.selectedIndex;
+                if(ind >= 0)
+                    showText += myForm.mySelect.option[ind].value;
+                window.document.open("text/html");
+                window.document.write(showText);
+                window.document.close();
+            }
+        </script>
+        </div>
+
         <h2>717 onsubmit</h2>
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group col-md-12">
@@ -22,7 +173,6 @@
                 <br>
                 <button type="submit" class="btn btn-default" onclick="radioTest()">Submit</button>
             </div>
-
         </form>
 
         <br/>
@@ -592,6 +742,8 @@
 
     <!--/span-->
 </div><!--/row-->
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 {% endblock %}
 {#<!DOCTYPE html>#}
