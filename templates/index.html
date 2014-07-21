@@ -8,29 +8,224 @@
         <div class="clearfix">
             <h2>718 Black Jack</h2>
             <table border="1" id="tblDealer">
-            <tr>    <td width="68" height="90"><img border="0" src="/static/img/CardImages/0.jpg" width="65" height="87" name="g01"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="g02"></td>
-                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="g03"></td>
-                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="g04"></td>
-                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="g05"></td>
+            <tr>    <td width="68" height="90"><img border="0" src="/static/img/CardImages/0.jpg" width="65" height="87" name="h1" id="h1"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="h2" id="h2"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="h3" id="h3"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="h4" id="h4"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="h5" id="h5"></td>
             </tr>
             </table>
             <table border="1" id="tblPlayer">
-            <tr>    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p01"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p02"></td>
-                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="p03"></td>
-                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="p04"></td>
-                    <td width="68" height="90"><img src="/static/img/CardImages/53.jpg" name="p05"></td>
+            <tr>    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p1" id="p1"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p2" id="p2"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p3" id="p3"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p4" id="p4"></td>
+                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p5" id="p5"></td>
             </tr>
             </table>
-    <br />
-    莊家：<input type=text name = "gsc" value = "0"><br />
-    <br />
-    玩家：<input type=text name = "psc" value = "0"><br />
-    <br />
-            <input type="button" value="發牌" name="btnNewCard" onclick="sendcard()">
-            <input type="button" value="開牌" name="btnDeal" onclick="opencard()">
-            <script language="JavaScript">start();</script>
+            <br />莊家：<input type=text name = "gsc" value = "0" id="hScore"><br />
+            <br />玩家：<input type=text name = "psc" value = "0" id="pScore"><br />
+            <br />
+            <input type="button" value="Stand" name="btnNewCard" onclick="stand()" id="blackBtn1">
+            <input type="button" value="Deal" name="btnDeal" onclick="deal()" id="blackBtn2">
+            <input type="text" value="" class="field left" id="informationBlack" readonly>
+        </div>
+        <script language="JavaScript">start();</script>
+        <script language="JavaScript">
+            var card0to53 = new Array();
+            var value0to53_0to10 = new Array();
+            var hostScore = 0; //莊得點
+            var playerScore = 0; //玩得點
+            var grossPlayer0to5 = 0; //玩家的牌數-2
+            var grossHolder1to5 = 1; //莊家的牌數-2
+            var status = 0; //0 h1~h5 p1~p5:init
+            var grossHide = 52;
+            var drawedValue = 0;
+            var hrefThe53 = "/static/img/CardImages/53.jpg";
+            var hrefThe0 = "/static/img/CardImages/0.jpg";
+            var alertInfo = "";
+            var alertDirty = 0;
+            function clear(){
+                hostScore = 0; //莊得點
+                playerScore = 0; //玩得點
+                grossPlayer0to5 = 0; //玩家的牌數-2
+                grossHolder1to5 = 1; //莊家的牌數-2
+                status = 0; //0 h1~h5 p1~p5:init
+                grossHide = 52;
+                drawedValue = 0;
+                alertInfo = "";
+                alertDirty = 0;
+                document.getElementById("informationBlack").value = "";
+                for (var i = 0; i < 54; i++){
+                    card0to53[i] = i;
+                    if (i === 0) {
+                        value0to53_0to10[i] = 0;
+                    } else if (i === 53){
+                        value0to53_0to10[i] = 168;
+                    } else {
+                        if (i % 13 === 1) {
+                            value0to53_0to10[i] = 1;
+                        } else if (i % 13 <= 9 && i % 13 >= 2) {
+                            value0to53_0to10[i] = i % 13;
+                        } else {
+                            value0to53_0to10[i] = 10;
+                        }
+                    }
+                }
+                document.getElementById("pScore").value = "0";
+                document.getElementById("hScore").value = "0";
+                document.getElementById("p1").setAttribute("src", hrefThe53);
+                document.getElementById("p2").setAttribute("src", hrefThe53);
+                document.getElementById("p3").setAttribute("src", hrefThe53);
+                document.getElementById("p4").setAttribute("src", hrefThe53);
+                document.getElementById("p5").setAttribute("src", hrefThe53);
+                document.getElementById("h1").setAttribute("src", hrefThe0);
+                document.getElementById("h2").setAttribute("src", hrefThe53);
+                document.getElementById("h3").setAttribute("src", hrefThe53);
+                document.getElementById("h4").setAttribute("src", hrefThe53);
+                document.getElementById("h5").setAttribute("src", hrefThe53);
+                document.getElementById("blackBtn2").setAttribute("value", "Deal");
+            }
+            function checkScore(){
+{#                alert(status + ", " + playerScore + ", " + hostScore);#}
+                if (status == "p5" && (playerScore % 100) <= 21)
+                {
+                    alertInfo = "player win.";
+                    alertDirty = 1;
+                    return 0;
+                } else if (status == "h5" && (hostScore % 100) <= 21)
+                {
+                    alertInfo = "hose win.";
+                    alertDirty = 1;
+                    return 0;
+                } else if (playerScore === 21)
+                {
+                    alert("playerScore === 21");
+                    alertInfo = "player win.";
+                    alertDirty = 1;
+                    return 0;
+                } else if (hostScore === 21)
+                {
+                    alert("hostScore === 21");
+                    alertInfo = "hose win.";
+                    alertDirty = 1;
+                    return 0;
+                } else if (playerScore % 100 > 21)
+                {
+                    alertInfo = "hose win.";
+                    alertDirty = 1;
+                    return 0;
+                } else if (hostScore % 100 > 21)
+                {
+                    alertInfo = "player win.";
+                    alertDirty = 1;
+                    return 0;
+                }
+            }
+            function draw(){
+                var ran = Math.floor(Math.random()*(grossHide - 1)) + 1;
+                drawedValue = ran;
+                card0to53[ran] = card0to53[grossHide];
+                card0to53[grossHide] = drawedValue;
+                grossHide--;
+                if (status == "p1" || status == "p2" || status == "p3" || status == "p4" || status == "p5"){
+                    grossPlayer0to5 ++;
+                    if (value0to53_0to10[drawedValue] === 1){
+                        playerScore = playerScore + 101;
+                    } else {
+                        playerScore = playerScore + value0to53_0to10[drawedValue];
+                    }
+                    grossPlayer0to5++;
+                } else if (status == "h2" || status == "h3" || status == "h1" || status == "h4" || status == "h5"){
+                    grossPlayer0to5 ++;
+                    if (value0to53_0to10[drawedValue] === 1){
+                        hostScore = hostScore + 101;
+                    } else {
+                        hostScore = hostScore + value0to53_0to10[drawedValue];
+                    }
+                    grossHolder1to5++;
+                }
+                if (playerScore === 21 || playerScore === 111 || playerScore === 211 || playerScore === 311 || playerScore === 411 || playerScore === 121 || playerScore === 221 || playerScore === 321 || playerScore === 421) { playerScore = 21; alertDirty = 1;}
+                if (hostScore === 21 || hostScore === 111 || hostScore === 211 || hostScore === 311 || hostScore === 411 || hostScore === 121 || hostScore === 221 || hostScore === 321 || hostScore === 42) { hostScore = 21; alertDirty = 1;}
+                document.getElementById(status).src = "/static/img/CardImages/" + drawedValue + ".jpg";
+                document.getElementById("pScore").value = String(playerScore % 100);
+                document.getElementById("hScore").value = String(hostScore % 100);
+                checkScore();
+                if (alertDirty === 1){
+                    document.getElementById("informationBlack").value = alertInfo;
+                    document.getElementById("blackBtn2").value = "Clear";
+                    status = "end";
+                }
+                return drawedValue;
+            }
+            function init(){
+                document.getElementById("blackBtn2").value = "Hit";
+                for (var i = 0; i < 54; i++){
+                    card0to53[i] = i;
+                    if (i === 0) {
+                        value0to53_0to10[i] = 0;
+                    } else if (i === 53){
+                        value0to53_0to10[i] = 168;
+                    } else {
+                        if (i % 13 === 1) {
+                            value0to53_0to10[i] = 1;
+                        } else if (i % 13 <= 9 && i % 13 >= 2) {
+                            value0to53_0to10[i] = i % 13;
+                        } else {
+                            value0to53_0to10[i] = 10;
+                        }
+                    }
+                }
+                status = "p1";
+                draw();
+                status = "p2";
+                draw();
+                status = "h2";
+                draw();
+                status = "h3";
+                draw();
+                if (status != "end"){status = "p3";}
+{#                alert("init. " + card0to53);#}
+            }
+            function stand()
+            {
+                if (status == "p3" || status == "p4")
+                {
+                    status = "h1";
+                    draw();
+                    if (status != "end"){ status = "h4"; }
+                } else if (status == 0){
+                    alert("Please Click Deal");
+                } else if (status == "end"){
+                    alert("Please Click Clear");
+                } else if (status == "h4") {
+                    draw();
+                    if (status != "end"){ status = "h5"; }
+                } else if (status == "h5") {
+                    draw();
+                }
+            }
+            function deal()
+            {
+                if (status == 0) {
+                    init();
+                } else if (status == "p3") {
+                    draw();
+                    if (status != "end"){ status = "p4"; }
+                } else if (status == "p4") {
+                    draw();
+                    if (status != "end"){ status = "p5"; }
+                } else if (status == "p5") {
+                    draw();
+                    if (status != "end"){ status = "h1"; }
+                } else if (status == "end") {
+                    clear();
+                }
+            }
+        </script>
+
+
+
 
 
             <h2>718 canvas clip</h2>
