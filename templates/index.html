@@ -8,19 +8,19 @@
         <div class="clearfix">
             <h2>718 Black Jack</h2>
             <table border="1" id="tblDealer">
-            <tr>    <td width="68" height="90"><img border="0" src="/static/img/CardImages/0.jpg" width="65" height="87" name="h1" id="h1"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="h2" id="h2"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="h3" id="h3"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="h4" id="h4"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="h5" id="h5"></td>
+            <tr>    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/0.jpg" width="65" height="87" name="h1" id="h1"></td>
+                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="h2" id="h2"></td>
+                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="h3" id="h3"></td>
+                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="h4" id="h4"></td>
+                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="h5" id="h5"></td>
             </tr>
             </table>
             <table border="1" id="tblPlayer">
-            <tr>    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p1" id="p1"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p2" id="p2"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p3" id="p3"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p4" id="p4"></td>
-                    <td width="68" height="90"><img border="0" src="/static/img/CardImages/53.jpg" width="65" height="87" name="p5" id="p5"></td>
+            <tr>    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p1" id="p1"></td>
+                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p2" id="p2"></td>
+                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p3" id="p3"></td>
+                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p4" id="p4"></td>
+                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p5" id="p5"></td>
             </tr>
             </table>
             <br />莊家：<input type=text name = "gsc" value = "0" id="hScore"><br />
@@ -41,8 +41,8 @@
             var status = 0; //0 h1~h5 p1~p5:init
             var grossHide = 52;
             var drawedValue = 0;
-            var hrefThe53 = "/static/img/CardImages/53.jpg";
-            var hrefThe0 = "/static/img/CardImages/0.jpg";
+            var hrefThe53 = "http://668jerry.com/CardImages/53.jpg";
+            var hrefThe0 = "http://668jerry.com/CardImages/0.jpg";
             var alertInfo = "";
             var alertDirty = 0;
             function clear(){
@@ -147,7 +147,7 @@
                 }
                 if (playerScore === 21 || playerScore === 111 || playerScore === 211 || playerScore === 311 || playerScore === 411 || playerScore === 121 || playerScore === 221 || playerScore === 321 || playerScore === 421) { playerScore = 21; alertDirty = 1;}
                 if (hostScore === 21 || hostScore === 111 || hostScore === 211 || hostScore === 311 || hostScore === 411 || hostScore === 121 || hostScore === 221 || hostScore === 321 || hostScore === 42) { hostScore = 21; alertDirty = 1;}
-                document.getElementById(status).src = "/static/img/CardImages/" + drawedValue + ".jpg";
+                document.getElementById(status).src = "http://668jerry.com/CardImages/" + drawedValue + ".jpg";
                 document.getElementById("pScore").value = String(playerScore % 100);
                 document.getElementById("hScore").value = String(hostScore % 100);
                 checkScore();
