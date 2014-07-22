@@ -8,19 +8,19 @@
         <div class="clearfix">
             <h2>718 Black Jack</h2>
             <table border="1" id="tblDealer">
-            <tr>    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/0.jpg" width="65" height="87" name="h1" id="h1"></td>
-                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="h2" id="h2"></td>
-                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="h3" id="h3"></td>
-                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="h4" id="h4"></td>
-                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="h5" id="h5"></td>
+            <tr>    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="h1" id="h1"></td>
+                    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="h2" id="h2"></td>
+                    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="h3" id="h3"></td>
+                    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="h4" id="h4"></td>
+                    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="h5" id="h5"></td>
             </tr>
             </table>
             <table border="1" id="tblPlayer">
-            <tr>    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p1" id="p1"></td>
-                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p2" id="p2"></td>
-                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p3" id="p3"></td>
-                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p4" id="p4"></td>
-                    <td width="68" height="90"><img border="0" src="http://668jerry.com/CardImages/53.jpg" width="65" height="87" name="p5" id="p5"></td>
+            <tr>    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="p1" id="p1"></td>
+                    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="p2" id="p2"></td>
+                    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="p3" id="p3"></td>
+                    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="p4" id="p4"></td>
+                    <td width="68" height="90"><img border="0" src="" width="65" height="87" name="p5" id="p5"></td>
             </tr>
             </table>
             <br />莊家：<input type=text name = "gsc" value = "0" id="hScore"><br />
@@ -160,6 +160,7 @@
             }
             function init(){
                 document.getElementById("blackBtn2").value = "Hit";
+                document.getElementById("h1").src = "http://668jerry.com/CardImages/0.jpg";
                 for (var i = 0; i < 54; i++){
                     card0to53[i] = i;
                     if (i === 0) {

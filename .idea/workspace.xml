@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a23b06-9333-4b75-baea-72fa862331ed" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rango.db" afterPath="$PROJECT_DIR$/rango.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tango277.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +40,11 @@
       <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33236995" vertical-offset="1520" max-vertical-offset="14850">
-              <caret line="109" column="44" selection-start-line="109" selection-start-column="44" selection-end-line="109" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.72254336" vertical-offset="2180" max-vertical-offset="14865">
+              <caret line="162" column="44" selection-start-line="162" selection-start-column="44" selection-end-line="162" selection-end-column="44" />
               <folding>
-                <element signature="e#12313#12346#0#HTML" expanded="true" />
-                <element signature="e#32285#32305#0#HTML" expanded="true" />
+                <element signature="e#12036#12069#0#HTML" expanded="true" />
+                <element signature="e#32008#32028#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1076,11 +1078,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33236995" vertical-offset="1520" max-vertical-offset="14850">
-          <caret line="109" column="44" selection-start-line="109" selection-start-column="44" selection-end-line="109" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.72254336" vertical-offset="2180" max-vertical-offset="14865">
+          <caret line="162" column="44" selection-start-line="162" selection-start-column="44" selection-end-line="162" selection-end-column="44" />
           <folding>
-            <element signature="e#12313#12346#0#HTML" expanded="true" />
-            <element signature="e#32285#32305#0#HTML" expanded="true" />
+            <element signature="e#12036#12069#0#HTML" expanded="true" />
+            <element signature="e#32008#32028#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
