@@ -7,6 +7,36 @@
         <article>
 
         <div class="clearfix">
+            <h2>730 Facebook Share Dialog</h2>
+            <script>
+              window.fbAsyncInit = function() {
+                FB.init({
+                  appId      : '1442360699370908',//告訴facebook你是誰，把自己的app id加入
+                  xfbml      : true,//fb自定義的xml
+                  version    : 'v2.0'
+                });
+              };//sdk載入之後會主動呼叫這個init
+              // <fb:comment></fb:comment>這個標籤是fb自定義的，會變成fb留言版
+
+              function share(){
+                FB.ui({
+                  method: 'share',
+                  href: 'http://www.yahoo.com/',
+                }, function(response){});
+
+              }
+
+              (function(d, s, id){
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                 if (d.getElementById(id)) {return;}
+                 js = d.createElement(s); js.id = id;
+                 js.src = "//connect.facebook.net/en_US/sdk.js";
+                 fjs.parentNode.insertBefore(js, fjs);
+               }(document, 'script', 'facebook-jssdk'));
+
+
+            </script>
+
             <h2>730 Facebook Social Plugin</h2>
 
             <div id="fb-root"></div>
@@ -19,7 +49,6 @@
             }(document, 'script', 'facebook-jssdk'));
             //當場呼叫的匿名函數，有三個參數
             </script>
-
 
             <div class="fb-like" data-href="http://tango277.herokuapp.com" data-width="200" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
         </div>
