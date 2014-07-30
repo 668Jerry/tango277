@@ -31,9 +31,10 @@
                   method: 'share',
                   href: 'http://www.yahoo.com/',
                 }, function(response){});
+                  //跳出視窗需要onclick才會執行，以避免視窗炸彈，一打開視窗後無窮迴圈開視窗
               }
             </script>
-            <button onclick="share();">Share This</button>
+            <button onclick="share();">Share Yahoo Button.</button>
 
             <h2>730 Facebook Social Plugin</h2>
 
